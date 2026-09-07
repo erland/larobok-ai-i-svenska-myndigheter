@@ -1,0 +1,57 @@
+name: Build release artifacts
+
+on:
+  release:
+    types: [published]
+
+permissions:
+  contents: write
+
+jobs:
+  build-and-upload:
+    name: Build PDF and EPUB
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Install export dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y pandoc weasyprint python3-yaml
+
+      - name: Build PDF and EPUB
+        env:
+          RELEASE_TAG: ${{ github.event.release.tag_name }}
+        run: |
+          set -euo pipefail
+          VERSION="${RELEASE_TAG#v}"
+          if [[ -z "$VERSION" ]]; then
+            echo "Release-taggen gav inget versionsnummer: $RELEASE_TAG" >&2
+            exit 1
+          fi
+          chmod +x scripts/export-book.sh
+          BOOK_VERSION="$VERSION" ./scripts/export-book.sh
+
+          test -s exports/ai-i-svenska-myndigheter.pdf
+          test -s exports/ai-i-svenska-myndigheter.epub
+
+          cp exports/ai-i-svenska-myndigheter.pdf "exports/ai-i-svenska-myndigheter-${RELEASE_TAG}.pdf"
+          cp exports/ai-i-svenska-myndigheter.epub "exports/ai-i-svenska-myndigheter-${RELEASE_TAG}.epub"
+
+      - name: Validate EPUB archive
+        env:
+          RELEASE_TAG: ${{ github.event.release.tag_name }}
+        run: |
+          python3 -m zipfile -t "exports/ai-i-svenska-myndigheter-${RELEASE_TAG}.epub"
+
+      - name: Upload files to GitHub Release
+        env:
+          GH_TOKEN: ${{ github.token }}
+          RELEASE_TAG: ${{ github.event.release.tag_name }}
+        run: |
+          gh release upload "$RELEASE_TAG" \
+            "exports/ai-i-svenska-myndigheter-${RELEASE_TAG}.pdf" \
+            "exports/ai-i-svenska-myndigheter-${RELEASE_TAG}.epub" \
+            --clobber

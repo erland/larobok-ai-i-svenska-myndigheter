@@ -1,0 +1,16 @@
+title: AI i svenska myndigheter
+subtitle: Regler, gränser och praktiska vägval för IT- och verksamhetsarkitekter
+author: Erland Lindmark
+language: sv-SE
+book_type: praktisk handbok
+audience:
+- IT-arkitekter
+- verksamhetsarkitekter
+- lösningsarkitekter
+status: PDF med titelsida; EPUB utan innehållsförteckning i läsordningen och med normaliserade
+  kapitelrubriker i index
+version: 0.18.0
+source_verified_through: '2026-09-07'
+cover: true
+internal_illustrations: false
+cover_file: assets/cover/cover.png

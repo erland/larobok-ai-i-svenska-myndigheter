@@ -1,0 +1,13 @@
+body { line-height: 1.55; }
+h1 { text-align: center; margin-top: 2em; margin-bottom: 1em; }
+h2 { margin-top: 1.6em; }
+table { border-collapse: collapse; width: 100%; }
+th, td { border-bottom: 1px solid #aaa; padding: 0.35em 0.5em; vertical-align: top; }
+
+/* Numbered chapter openers: two centered lines. */
+h1:has(.chapter-number) { text-align: center; }
+h1 .chapter-number, h1 .chapter-name { display: block; text-align: center; }
+h1 .chapter-number { font-size: 0.65em; font-weight: 600; margin-bottom: 0.35em; }
+h1 .chapter-name { font-size: 1em; font-weight: 700; }
+nav .chapter-number, nav .chapter-name { display: inline; }
+nav .chapter-number::after { content: ". "; }

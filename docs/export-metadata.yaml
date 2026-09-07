@@ -1,0 +1,25 @@
+title: AI i svenska myndigheter
+subtitle: Regler, gränser och praktiska vägval för IT- och verksamhetsarkitekter
+author: Erland Lindmark
+language: sv-SE
+identifier: ai-i-svenska-myndigheter
+date: '2026-09-07'
+version: 0.18.0
+rights: Copyright © Erland Lindmark
+chapters:
+- chapters/00-inledning.md
+- chapters/01-kartan-over-styrningen.md
+- chapters/02-ai-forordningen.md
+- chapters/03-informationen.md
+- chapters/04-ai-och-myndighetsbeslut.md
+- chapters/05-extern-ai.md
+- chapters/06-offentlighet-dokumentation-sparbarhet.md
+- chapters/07-fran-ide-till-arkitekturbeslut.md
+- chapters/08-praktiska-scenarier.md
+- chapters/90-bilaga-a-regelverkskarta.md
+- chapters/91-bilaga-b-sektorsspecifik-reglering.md
+export:
+  epub_toc_depth: 1
+  pdf_toc_depth: 1
+  cover: assets/cover/cover.png
+cover-image: assets/cover/cover.png
